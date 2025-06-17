@@ -1,0 +1,53 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.post-card {
+  width: 320px;
+  height: 300px;
+  @include flex(column);
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid $deep-purple;
+
+  .user {
+    @include TextPreset2;
+
+    span {
+      color: $deep-purple;
+      font-weight: bold;
+    }
+  }
+
+  h1 {
+    @include TextPreset2;
+    font-weight: 500;
+    color: $deep-purple;
+  }
+
+  .post-detail {
+    overflow: hidden;
+    height: 150px;
+    padding: 5px 0;
+  }
+
+  .action-section {
+    width: 100%;
+    @include flex(row, space-between);
+    margin-top: 10px;
+
+    .view {
+      @include actionButton;
+    }
+    .edit {
+      @include actionButton(rgb(109, 109, 231));
+    }
+    .delete {
+      @include actionButton(rgb(245, 64, 64));
+    }
+
+    .access-action {
+      @include flex(row, space-between, stretch, 10px);
+    }
+  }
+}

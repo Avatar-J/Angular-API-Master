@@ -12,7 +12,6 @@
 
 @mixin actionButton($bg-color: #5c1e8a) {
   background-color: $bg-color;
-  width: 100%;
   color: $white;
   padding: 5px 20px;
   border-radius: 999px;

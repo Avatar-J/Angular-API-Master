@@ -1,0 +1,41 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.list-wrapper {
+  width: 100%;
+  @include flex(column, center, center, 20px);
+
+  .header {
+    width: 100%;
+    color: $deep-purple;
+    @include flex(column, center, center, 10px);
+
+    h2 {
+      @include TextPreset1;
+    }
+    p {
+      @include TextPreset2;
+    }
+  }
+
+  .post-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+  }
+  .empty-container {
+    width: 100%;
+    height: 100%;
+    @include flex(column, center, center);
+
+    img {
+      height: 300px;
+      width: 300px;
+    }
+
+    h2 {
+      color: $deep-purple;
+      @include TextPreset3;
+    }
+  }
+}
