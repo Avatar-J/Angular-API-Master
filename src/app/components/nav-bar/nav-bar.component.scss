@@ -16,6 +16,10 @@ nav {
   .page-links {
     @include flex(row, flex-start, center, 20px);
 
+    a {
+      text-decoration: none;
+    }
+
     button {
       @include actionButton;
       @include TextPreset2;
