@@ -1,0 +1,64 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.view-post {
+  width: 1000px;
+  margin: 20px auto;
+  @include flex(column, flex-start, center, 20px);
+
+  h1 {
+    width: 100%;
+    color: $deep-purple;
+    @include TextPreset1;
+  }
+
+  .post {
+    width: 100%;
+    @include flex(column, center, center, 20px);
+
+    h1 {
+      text-align: center;
+    }
+
+    .edit {
+      @include actionButton(rgb(111, 111, 224));
+    }
+    .delete {
+      @include actionButton(rgb(230, 104, 104));
+    }
+
+    .access-action {
+      @include flex(row, center, center, 20px);
+    }
+
+    .body {
+      text-align: left;
+    }
+  }
+
+  .comments-wrapper {
+    width: 100%;
+    @include flex(column, flex-start, center, 20px);
+
+    h1 {
+      border-bottom: 2px solid $deep-purple;
+    }
+
+    .comments-container {
+      width: 100%;
+      @include flex(column, flex-start, stretch, 20px);
+
+      .comment-detail {
+        @include flex(column, flex-start, stretch, 8px);
+
+        h2 {
+          color: $deep-purple;
+          @include TextPreset3;
+        }
+        .email {
+          color: rgb(233, 119, 138);
+        }
+      }
+    }
+  }
+}
