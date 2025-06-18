@@ -1,0 +1,13 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.create-post {
+  width: 100%;
+  @include flex(column, center, center, 20px);
+  margin: 20px 0;
+
+  h2 {
+    color: $deep-purple;
+    @include TextPreset1;
+  }
+}

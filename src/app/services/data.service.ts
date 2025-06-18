@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../Models/post';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Comment } from '../Models/Comment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  private postsSubject = new BehaviorSubject<Post[]>([]);
+  public posts$ = this.postsSubject.asObservable();
+
   endpoint = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) {}
