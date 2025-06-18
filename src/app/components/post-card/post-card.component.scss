@@ -10,6 +10,17 @@
   border-radius: 8px;
   border: 1px solid $deep-purple;
 
+  .edit {
+    @include actionButton(transparent);
+  }
+  .delete {
+    @include actionButton(transparent);
+  }
+
+  .access-action {
+    @include flex(row, space-between, stretch);
+  }
+
   .user {
     @include TextPreset2;
 
@@ -27,27 +38,22 @@
 
   .post-detail {
     overflow: hidden;
-    height: 150px;
+    height: 50px;
     padding: 5px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .action-section {
     width: 100%;
-    @include flex(row, space-between);
+    @include flex(row, center);
     margin-top: 10px;
 
     .view {
-      @include actionButton;
-    }
-    .edit {
-      @include actionButton(rgb(109, 109, 231));
-    }
-    .delete {
-      @include actionButton(rgb(245, 64, 64));
-    }
-
-    .access-action {
-      @include flex(row, space-between, stretch, 10px);
+      @include actionButton(transparent);
+      color: $deep-purple;
     }
   }
 }
