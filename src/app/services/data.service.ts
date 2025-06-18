@@ -7,7 +7,7 @@ import { Comment } from '../Models/Comment';
 @Injectable({
   providedIn: 'root',
 })
-export class JsonPlaceholderClientService {
+export class DataService {
   endpoint = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) {}
@@ -22,5 +22,8 @@ export class JsonPlaceholderClientService {
 
   getComments(id: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${this.endpoint}/posts/${id}/comments`);
+  }
+  deletePost(id: string) {
+    this.http.delete(`${this.endpoint}/posts/${id}`);
   }
 }

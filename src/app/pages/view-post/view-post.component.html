@@ -1,4 +1,7 @@
 <section class="view-post">
+    @if(isLoading){
+    <app-loader />
+    }@else {
     <div class="post">
 
         <h1>{{post.title}}</h1>
@@ -11,12 +14,13 @@
 
         <div class="access-action">
             <button class="edit">Edit</button>
-            <button class="delete">Delete</button>
+            <button class="delete" (click)="onToggleModal()">Delete</button>
         </div>
     </div>
 
     <div class="comments-wrapper">
-        <h1>Comments({{comments.length}})</h1>
+        <h1>Comments
+            @if(commentLength){({{comments.length}})}</h1>
 
         <div class="comments-container">
             @for(comment of comments; track comment.id){
@@ -30,4 +34,11 @@
         </div>
 
     </div>
+    }
+
+
+    @if(showModal){
+    <app-modal (closeModal)="onToggleModal()" />
+    }
+
 </section>
