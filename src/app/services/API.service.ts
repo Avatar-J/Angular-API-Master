@@ -10,12 +10,13 @@ import {
 } from 'rxjs';
 import { Comment } from '../Models/Comment';
 import { ErrorHandler } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class APIService {
-  endpoint = 'https://jsonplaceholder.typicode.com';
+  endpoint = environment.apiUrl;
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandler) {}
 
