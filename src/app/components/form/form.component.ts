@@ -6,6 +6,7 @@ import { Post } from '../../Models/post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { ToastService } from '../../services/toast.service';
+import { profanityValidator } from './custom-validator';
 
 @Component({
   selector: 'app-form',
@@ -29,11 +30,11 @@ export class FormComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [
         this.post?.title || '',
-        [Validators.required, Validators.minLength(5)],
+        [Validators.required, Validators.minLength(5), profanityValidator()],
       ],
       body: [
         this.post?.body || '',
-        [Validators.required, Validators.maxLength(1000)],
+        [Validators.required, Validators.maxLength(1000), profanityValidator()],
       ],
     });
   }
