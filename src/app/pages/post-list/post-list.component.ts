@@ -3,6 +3,7 @@ import { PostCardComponent } from '../../components/post-card/post-card.componen
 import { APIService } from '../../services/API.service';
 import { Post } from '../../Models/post';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-post-list',
@@ -12,15 +13,20 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 })
 export class PostListComponent implements OnInit {
   APIService = inject(APIService);
+  dataService = inject(DataService);
   postList!: Post[];
   isloading: boolean = true;
 
   ngOnInit(): void {
-    this.APIService.getPosts().subscribe({
+    this.dataService.posts$.subscribe({
       next: (posts) => {
         this.postList = posts;
+
+        setTimeout(() => {
+          this.isloading = false;
+        }, 1000);
       },
-      complete: () => {
+      error: (error) => {
         this.isloading = false;
       },
     });

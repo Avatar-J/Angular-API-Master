@@ -22,6 +22,6 @@ export class ErrorService {
     } else if (typeof error.error === 'string') {
       message = error.error;
     }
-    this.toast.show(message);
+    this.toast.show(message, 'error');
   }
 }

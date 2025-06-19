@@ -5,6 +5,7 @@ import { Post } from '../../Models/post';
 import { Comment } from '../../Models/Comment';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-view-post',
@@ -15,6 +16,8 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 export class ViewPostComponent implements OnInit {
   router = inject(ActivatedRoute);
   APIService = inject(APIService);
+  dataService = inject(DataService);
+
   post!: Post;
   comments!: Comment[];
   showModal: boolean = false;
@@ -25,23 +28,33 @@ export class ViewPostComponent implements OnInit {
     const id = this.router.snapshot.paramMap.get('id');
 
     if (id) {
-      this.APIService.getSinglePost(id).subscribe({
+      this.dataService.getPostById(id);
+      this.dataService.singlePosts$.subscribe({
         next: (post) => {
-          this.post = post;
+          if (post) {
+            this.post = post;
+
+            setTimeout(() => {
+              this.isLoading = false;
+            }, 500);
+          }
         },
-        complete: () => {
-          this.isLoading = false;
+      });
+      this.dataService.comments$.subscribe({
+        next: (comments) => {
+          this.comments = comments;
+          this.commentLength = comments.length;
         },
       });
 
-      this.APIService.getComments(id).subscribe({
-        next: (comments) => {
-          this.comments = comments;
-        },
-        complete: () => {
-          this.commentLength = this.comments.length;
-        },
-      });
+      // this.APIService.getComments(id).subscribe({
+      //   next: (comments) => {
+      //     this.comments = comments;
+      //   },
+      //   complete: () => {
+      //     this.commentLength = this.comments.length;
+      //   },
+      // });
     }
   }
 

@@ -15,9 +15,6 @@ import { ErrorHandler } from '@angular/core';
   providedIn: 'root',
 })
 export class APIService {
-  private postsSubject = new BehaviorSubject<Post[]>([]);
-  public posts$ = this.postsSubject.asObservable();
-
   endpoint = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandler) {}
@@ -53,8 +50,18 @@ export class APIService {
         })
       );
   }
-  deletePost(id: string) {
-    this.http.delete(`${this.endpoint}/posts/${id}`).pipe(
+  deletePost(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.endpoint}/posts/${id}`).pipe(
+      retry(3),
+      catchError((err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+        return throwError(() => err);
+      })
+    );
+  }
+
+  createPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(`${this.endpoint}/posts`, post).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
