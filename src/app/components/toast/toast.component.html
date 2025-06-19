@@ -1,0 +1,7 @@
+<div class="toast-container">
+
+    <div *ngIf="toastService.message" class="toast" [ngClass]="toastService.type" (click)="dismiss()">
+        <span>{{ toastService.message }}</span>
+        <button class="close" (click)="dismiss()"><img src="assets/icons8-close.svg" /></button>
+    </div>
+</div>

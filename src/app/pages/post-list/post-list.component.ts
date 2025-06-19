@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
-import { DataService } from '../../services/data.service';
+import { APIService } from '../../services/API.service';
 import { Post } from '../../Models/post';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-post-list',
@@ -11,16 +12,21 @@ import { LoaderComponent } from '../../components/loader/loader.component';
   styleUrl: './post-list.component.scss',
 })
 export class PostListComponent implements OnInit {
-  JsonPlaceHolder = inject(DataService);
+  APIService = inject(APIService);
+  dataService = inject(DataService);
   postList!: Post[];
   isloading: boolean = true;
 
   ngOnInit(): void {
-    this.JsonPlaceHolder.getPosts().subscribe({
+    this.dataService.posts$.subscribe({
       next: (posts) => {
         this.postList = posts;
+
+        setTimeout(() => {
+          this.isloading = false;
+        }, 1000);
       },
-      complete: () => {
+      error: (error) => {
         this.isloading = false;
       },
     });
