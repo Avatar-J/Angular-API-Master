@@ -1,0 +1,48 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.login-page {
+  //   z-index: 999;
+  //   position: fixed;
+  inset: 0;
+  background-color: white;
+  width: 100vw;
+  height: 100%;
+  //   @include flex(column, center, center, 20px);
+
+  .login-form {
+    display: flex;
+    min-height: 300px;
+    padding: 20px;
+    width: 100%;
+    @include flex(column, center, center, 20px);
+
+    .form-control {
+      @include flex(column, flex-start, center, 10px);
+
+      label {
+        width: 100%;
+        @include TextPreset3;
+        color: $deep-purple;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        outline: none;
+        background-color: transparent;
+        height: 50px;
+        border-radius: 8px;
+        padding: 10px 20px;
+      }
+      input:focus {
+        background-color: rgba($lavender, 0.4);
+        border: 2px solid $deep-purple;
+      }
+    }
+    button {
+      @include actionButton;
+      width: 200px;
+    }
+  }
+}

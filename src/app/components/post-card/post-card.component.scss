@@ -3,6 +3,7 @@
 
 .post-card {
   width: 300px;
+  min-height: 200px;
   height: 300px;
   @include flex(column);
   padding: 20px;
