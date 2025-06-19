@@ -20,7 +20,7 @@
 
     <div class="comments-wrapper">
         <h1>Comments
-            @if(commentLength){({{comments.length}})}</h1>
+            @if(commentLength){({{comments?.length }})}</h1>
 
         <div class="comments-container">
             @for(comment of comments; track comment.id){

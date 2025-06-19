@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Post } from '../../Models/post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-form',
@@ -18,6 +19,7 @@ export class FormComponent implements OnInit {
   private router = inject(Router);
   formBuilder = inject(FormBuilder);
   dataService = inject(DataService);
+  toastService = inject(ToastService);
 
   form!: FormGroup;
 
@@ -52,9 +54,12 @@ export class FormComponent implements OnInit {
         // this.dataService.updatePost(post);
       } else {
         this.dataService.createPost(newPost);
-      }
+        this.toastService.show('Created new post successfully', 'success');
 
-      this.router.navigate(['view', newPost.id]);
+        setTimeout(() => {
+          this.router.navigate(['view', newPost.id]);
+        }, 2000);
+      }
     }
   }
 }
