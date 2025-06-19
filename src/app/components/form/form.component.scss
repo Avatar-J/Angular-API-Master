@@ -59,6 +59,11 @@
         background-color: rgba($lavender, 0.5);
         border: 2px solid $deep-purple;
       }
+      input.ng-invalid.ng-touched,
+      textarea.ng-invalid.ng-touched {
+        border: 1px solid red;
+      }
+
       .char {
         width: 100%;
         text-align: right;

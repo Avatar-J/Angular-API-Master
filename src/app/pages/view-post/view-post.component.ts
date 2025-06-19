@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../services/data.service';
+import { APIService } from '../../services/API.service';
 import { Post } from '../../Models/post';
 import { Comment } from '../../Models/Comment';
 import { ModalComponent } from '../../components/modal/modal.component';
@@ -14,7 +14,7 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 })
 export class ViewPostComponent implements OnInit {
   router = inject(ActivatedRoute);
-  JsonPlaceholder = inject(DataService);
+  APIService = inject(APIService);
   post!: Post;
   comments!: Comment[];
   showModal: boolean = false;
@@ -25,7 +25,7 @@ export class ViewPostComponent implements OnInit {
     const id = this.router.snapshot.paramMap.get('id');
 
     if (id) {
-      this.JsonPlaceholder.getSinglePost(id).subscribe({
+      this.APIService.getSinglePost(id).subscribe({
         next: (post) => {
           this.post = post;
         },
@@ -34,7 +34,7 @@ export class ViewPostComponent implements OnInit {
         },
       });
 
-      this.JsonPlaceholder.getComments(id).subscribe({
+      this.APIService.getComments(id).subscribe({
         next: (comments) => {
           this.comments = comments;
         },

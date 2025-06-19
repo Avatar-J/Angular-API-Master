@@ -1,0 +1,39 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.toast-container {
+  width: 100%;
+  @include flex(row, flex-end);
+
+  .toast {
+    background-color: $white;
+    color: $white;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    width: 300px;
+  }
+  .toast.success {
+    background-color: #38a169;
+  }
+  .toast.error {
+    background-color: #e53e3e;
+  }
+  .toast.info {
+    background-color: #3182ce;
+  }
+  .toast .close {
+    //   background: transparent;
+    //   border: none;
+    //   font-size: 16px;
+    //   color: white;
+    //   margin-left: 10px;
+    @include actionButton(transparent);
+  }
+}

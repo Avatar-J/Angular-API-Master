@@ -1,33 +1,33 @@
 <section class="form-wrapper">
-    <form (ngSubmit)="onSubmit()" #postForm="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
         <div class="form-control-container">
             <label for="title">Post Title</label>
-            <input id="title" [(ngModel)]="title" placeholder="Enter an engaging title for your post" name="title"
-                #title=ngModel required minlength="5" />
+            <input id="title" placeholder="Enter an engaging title for your post" name="title"
+                formControlName="title" />
 
-            <div class="error" *ngIf="title.invalid && title.touched">
-                <small *ngIf="title.errors?.['required']">Title is required.</small>
-                <small *ngIf="title.errors?.['minlength']">Title must be at least 5 characters.</small>
+            <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+                <small *ngIf="form.get('title')?.errors?.['required']">Title is required.</small>
+                <small *ngIf="form.get('title')?.errors?.['minlength']">Title must be at least 5 characters.</small>
             </div>
         </div>
 
         <div class="form-control-container">
             <label for="body">Post Content</label>
-            <textarea id="body" [(ngModel)]="body" placeholder="Write your post content..." name="body" #body="ngModel"
-                required></textarea>
-            <div class="char">{{body.value.length}}/1000 characters</div>
+            <textarea id="body" placeholder="Write your post content..." name="body" formControlName="body"></textarea>
 
-            <div class="error" *ngIf="body.invalid && body.touched">
-                <small *ngIf="body.errors?.['required']">Post content is required.</small>
-                <small *ngIf="body.errors?.['maxlength']">Content must be under 1000 characters.</small>
+            <div class="char">{{form.get('body')?.value?.length || 0}}/1000 characters</div>
+
+            <div class="error" *ngIf="form.get('body')?.touched && form.get('body')?.invalid">
+                <small *ngIf="form.get('body')?.errors?.['required']">Post content is required.</small>
+                <small *ngIf="form.get('body')?.errors?.['maxlength']">Content must be under 1000 characters.</small>
             </div>
         </div>
 
         <div class="action-section">
             <button class="cancel">Cancel</button>
 
-            <button class="submit-btn" type="submit" [disabled]="postForm.invalid">Create Post</button>
+            <button class="submit-btn" type="submit" [disabled]="form.invalid">Create Post</button>
 
         </div>
 

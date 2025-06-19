@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { DataService } from '../../services/data.service';
+import { APIService } from '../../services/API.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class ModalComponent {
   @Output()
   closeModal = new EventEmitter();
 
-  data = inject(DataService);
+  data = inject(APIService);
   route = inject(ActivatedRoute);
   private router = inject(Router);
 
