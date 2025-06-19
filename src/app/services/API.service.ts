@@ -11,6 +11,7 @@ import {
 import { Comment } from '../Models/Comment';
 import { ErrorHandler } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +19,14 @@ import { environment } from '../../environments/environment';
 export class APIService {
   endpoint = environment.apiUrl;
 
-  constructor(private http: HttpClient, private errorHandler: ErrorHandler) {}
+  constructor(
+    private http: HttpClient,
+    private errorHandler: ErrorHandler,
+    private cacheService: CacheService
+  ) {}
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.endpoint}/posts`).pipe(
+    return this.cacheService.get<Post[]>(`${this.endpoint}/posts`).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -31,7 +36,7 @@ export class APIService {
   }
 
   getSinglePost(id: string): Observable<Post> {
-    return this.http.get<Post>(`${this.endpoint}/posts/${id}`).pipe(
+    return this.cacheService.get<Post>(`${this.endpoint}/posts/${id}`).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
