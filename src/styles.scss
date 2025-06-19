@@ -8,6 +8,15 @@
   @include TextPreset2;
 
   @include breakpoint(480px) {
+    width: 100%;
     @include TextPreset4;
   }
+  @include breakpoint(740px) {
+    width: 100%;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
