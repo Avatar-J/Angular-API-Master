@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@use "../src/app/styles/mixins" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  @include TextPreset2;
+
+  @include breakpoint(480px) {
+    @include TextPreset4;
+  }
+}

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class JsonPlaceholderClientService {
-  endpoint = 'https://jsonplaceholder.typicode.com/';
+  endpoint = 'https://jsonplaceholder.typicode.com/posts';
 
   constructor(private http: HttpClient) {}
 

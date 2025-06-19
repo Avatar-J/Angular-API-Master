@@ -1,0 +1,40 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+nav {
+  width: 100%;
+  background-color: $lavender;
+  min-height: 60px;
+  padding: 10px 20px;
+  @include flex(row, space-between, center);
+
+  h1 {
+    @include TextPreset1;
+    color: $deep-purple;
+  }
+
+  .page-links {
+    @include flex(row, flex-start, center, 20px);
+
+    a {
+      text-decoration: none;
+    }
+
+    button {
+      @include actionButton;
+      @include TextPreset2;
+    }
+  }
+
+  @include breakpoint(480px) {
+    width: 100%;
+    @include flex(column, space-between, center);
+
+    h1 {
+      @include TextPreset3;
+    }
+    button {
+      @include TextPreset4;
+    }
+  }
+}

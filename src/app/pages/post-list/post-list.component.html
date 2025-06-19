@@ -1,0 +1,22 @@
+<section class="list-wrapper">
+
+    <section class="header">
+        <h2>Hello</h2>
+        <p>Check out our latest posts</p>
+    </section>
+
+    <section class="post-list">
+
+        @for(post of postList; track post.id){
+
+        <app-post-card [post]="post" />
+        }
+
+    </section>
+    @if(postList.length === 0) {
+    <div class="empty-container">
+        <img src="assets/Blank-canvas-cuate.svg" />
+        <h2>No posts available</h2>
+    </div>
+    }
+</section>
