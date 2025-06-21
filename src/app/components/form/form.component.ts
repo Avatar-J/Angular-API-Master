@@ -25,8 +25,13 @@ export class FormComponent implements OnInit {
   form!: FormGroup;
 
   bodyChar: number = 0;
+  submitText: string = 'Create Post';
 
   ngOnInit(): void {
+    if (this.post) {
+      this.submitText = 'Update Post';
+    }
+
     this.form = this.formBuilder.group({
       title: [
         this.post?.title || '',
@@ -45,14 +50,15 @@ export class FormComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const newPost: Post = {
-        userId: 1,
-        id: Math.floor(Math.random() * 1000) + 1,
+        userId: this.post ? this.post.userId : 1,
+        id: this.post ? this.post.id : Math.floor(Math.random() * 1000) + 1,
         title: this.form.value.title,
         body: this.form.value.body,
       };
 
       if (this.post) {
-        // this.dataService.updatePost(post);
+        this.dataService.editPost(newPost);
+        this.toastService.show('Updated post successfully', 'success');
       } else {
         this.dataService.createPost(newPost);
         this.toastService.show('Created new post successfully', 'success');

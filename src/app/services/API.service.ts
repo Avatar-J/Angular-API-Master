@@ -75,4 +75,14 @@ export class APIService {
       })
     );
   }
+
+  updatePost(post: Post): Observable<Post> {
+    return this.http.put<Post>(`${this.endpoint}/posts`, post).pipe(
+      retry(3),
+      catchError((err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+        return throwError(() => err);
+      })
+    );
+  }
 }

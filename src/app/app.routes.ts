@@ -3,6 +3,7 @@ import { PostListComponent } from './pages/post-list/post-list.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { ViewPostComponent } from './pages/view-post/view-post.component';
 import { protectedRoutesGuard } from './guards/protected-routes.guard';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
 
 export const routes: Routes = [
   {
@@ -18,5 +19,9 @@ export const routes: Routes = [
   {
     path: 'view/:id',
     component: ViewPostComponent,
+  },
+  {
+    path: 'edit/:id',
+    component: EditPostComponent,
   },
 ];

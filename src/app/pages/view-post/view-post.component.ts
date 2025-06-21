@@ -36,7 +36,7 @@ export class ViewPostComponent implements OnInit {
 
             setTimeout(() => {
               this.isLoading = false;
-            }, 200);
+            }, 100);
           }
         },
       });
