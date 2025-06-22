@@ -1,0 +1,18 @@
+<section class="login-page">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-control">
+            <label for="username">Username</label>
+            <input formControlName="username" placeholder="Username" type="text" />
+
+        </div>
+
+        <div class="form-control">
+            <label for="password">Password</label>
+            <input formControlName="password" placeholder="Password" type="password" />
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+</section>

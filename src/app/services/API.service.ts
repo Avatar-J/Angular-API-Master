@@ -10,17 +10,23 @@ import {
 } from 'rxjs';
 import { Comment } from '../Models/Comment';
 import { ErrorHandler } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class APIService {
-  endpoint = 'https://jsonplaceholder.typicode.com';
+  endpoint = environment.apiUrl;
 
-  constructor(private http: HttpClient, private errorHandler: ErrorHandler) {}
+  constructor(
+    private http: HttpClient,
+    private errorHandler: ErrorHandler,
+    private cacheService: CacheService
+  ) {}
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.endpoint}/posts`).pipe(
+    return this.cacheService.get<Post[]>(`${this.endpoint}/posts`).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -30,7 +36,7 @@ export class APIService {
   }
 
   getSinglePost(id: string): Observable<Post> {
-    return this.http.get<Post>(`${this.endpoint}/posts/${id}`).pipe(
+    return this.cacheService.get<Post>(`${this.endpoint}/posts/${id}`).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -62,6 +68,16 @@ export class APIService {
 
   createPost(post: Post): Observable<Post> {
     return this.http.post<Post>(`${this.endpoint}/posts`, post).pipe(
+      retry(3),
+      catchError((err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+        return throwError(() => err);
+      })
+    );
+  }
+
+  updatePost(post: Post): Observable<Post> {
+    return this.http.put<Post>(`${this.endpoint}/posts`, post).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);

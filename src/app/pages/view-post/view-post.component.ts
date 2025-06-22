@@ -19,7 +19,7 @@ export class ViewPostComponent implements OnInit {
   dataService = inject(DataService);
 
   post!: Post;
-  comments!: Comment[];
+  comments!: Comment[] | null;
   showModal: boolean = false;
   isLoading: boolean = true;
   commentLength!: number;
@@ -36,7 +36,7 @@ export class ViewPostComponent implements OnInit {
 
             setTimeout(() => {
               this.isLoading = false;
-            }, 500);
+            }, 100);
           }
         },
       });

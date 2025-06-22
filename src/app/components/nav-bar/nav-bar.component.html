@@ -2,7 +2,7 @@
     <h1>TalkNest</h1>
 
     <div class="page-links">
-        <a [routerLink]="['']">
+        <a [routerLink]="['/']">
             Home
         </a>
 
@@ -10,8 +10,15 @@
             CreatePost
         </a>
 
-        <button>
+        @if(authService.isAuthenticated){
+        <button (click)="logout()">
             Logout
         </button>
+        }@else {
+        <button (click)="login()">
+            Login
+        </button>
+        }
+
     </div>
 </nav>

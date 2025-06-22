@@ -88,10 +88,18 @@ export class DataService {
       },
     });
   }
-  // editPost(post: Post): void {
-  //   const updatedPosts = this.postsSubject
-  //     .getValue()
-  //     .map((p) => (p.id === post.id ? post : p));
-  //   this.postsSubject.next(updatedPosts);
-  // }
+
+  editPost(post: Post): void {
+    this.apiService.updatePost(post).subscribe({
+      next: () => {
+        const updatedPosts = this.postsSubject
+          .getValue()
+          .map((p) => (p.id === post.id ? post : p));
+        this.postsSubject.next(updatedPosts);
+      },
+      error: (error) => {
+        this.errorService.handle(error);
+      },
+    });
+  }
 }

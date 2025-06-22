@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject, Input } from '@angular/core';
 import { APIService } from '../../services/API.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,7 +12,10 @@ export class ModalComponent {
   @Output()
   closeModal = new EventEmitter();
 
-  data = inject(APIService);
+  @Input()
+  postId!: string;
+
+  dataService = inject(APIService);
   route = inject(ActivatedRoute);
   private router = inject(Router);
 
@@ -20,9 +23,12 @@ export class ModalComponent {
     this.closeModal.emit();
   }
   onDeletePost() {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.postId
+      ? this.postId
+      : this.route.snapshot.paramMap.get('id');
+    // const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
-      this.data.deletePost(id);
+      this.dataService.deletePost(id);
     }
     this.closeModal.emit();
     this.router.navigate(['']);
